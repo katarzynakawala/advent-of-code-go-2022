@@ -28,17 +28,13 @@ func main() {
 		secondCompartment := rucksack[halfRucksackLength:]
 
 		commonPrt := Intersection(firstCompartment, secondCompartment)
-		fmt.Println(string(commonPrt))
 		
-		withoutCopies := removeDuplicateRune(commonPrt)
-
-		for _, l := range withoutCopies {
-			res += letter[l]
-		}
+		res += letter[commonPrt]
 	}	
+	fmt.Println(res)
 }
 
-func Intersection(a, b string) (c []rune) {
+func Intersection(a, b string) (c rune) {
 	m := make(map[rune]bool) 
 
 	for _, item := range a {
@@ -47,20 +43,8 @@ func Intersection(a, b string) (c []rune) {
 
 	for _, item := range b {
 		if _, ok := m[item]; ok {
-				c = append(c, item)
+				c = item
 			}
 		}
 	return
-}
-
-func removeDuplicateRune(runeSlice []rune) []rune {
-    allKeys := make(map[rune]bool)
-    list := []rune{}
-    for _, item := range runeSlice {
-        if _, value := allKeys[item]; !value {
-            allKeys[item] = true
-            list = append(list, item)
-        }
-    }
-    return list
 }
